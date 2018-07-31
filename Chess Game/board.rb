@@ -59,9 +59,7 @@ class Board
   #board.[]=(0, 1, "X") # sets the top-middle square to "X"
 
   def move_piece(start_pos, end_pos)
-    if self[end_pos] = @sentinel
-    end
-
+    raise ArgumentError "There is no piece here!" if self[start_pos] = @sentinel
 
   end
 
@@ -71,12 +69,6 @@ class Board
     elsif Piece.color
       # if the piece at the end position is the same color as your piece, this is not a valid move :(
 
-    end
-
-    if valid_pos?(end_pos)
-      @rows[start_pos] = NullPiece.new
-      @rows[end_pos] = nil #piece in question
-      #execute the rest
     end
   end
 
