@@ -25,20 +25,44 @@ class Board
       if i == 0 || i == 7  #rows for the non-Pawn pieces
         row.each_with_index do |tile, j|
           if ((i == 0 || i == 7) && (j == 0 || j == 7))
-            self[i, j] = Rook.new#("black", self, [i, j])
+            if i == 0
+              self[i, j] = Rook.new("black", self, [i, j])
+            else
+              self[i, j] = Rook.new("white", self, [i, j])
+            end
           elsif ((i == 0 || i == 7) && (j == 1 || j == 6))
-            self[i, j] = Knight.new
+            if i == 0
+              self[i, j] = Knight.new("black", self, [i, j])
+            else
+              self[i, j] = Knight.new("white", self, [i, j])
+            end
           elsif ((i == 0 || i == 7) && (j == 2 || j == 5))
-            self[i, j] = Bishop.new
+            if i == 0
+              self[i, j] = Bishop.new("black", self, [i, j]) #black bishop
+            else
+              self[i, j] = Bishop.new("white", self, [i, j]) #white bishop
+            end
           elsif ((i == 0 && j == 3) || (i == 7 && j == 4)) #king spaces
-            self[i, j] = King.new
+            if i == 0
+              self[i, j] = King.new("black", self, [i, j]) #black king
+            else
+              self[i, j] = King.new("white", self, [i, j]) #white king
+            end
           elsif ((i == 0 && j == 4) || (i == 7 && j == 3)) #queen spaces
-            self[i, j] = Queen.new
+            if i == 0
+              self[i, j] = Queen.new("black", self, [i, j]) #black queen
+            else
+              self[i, j] = Queen.new("white", self, [i, j]) #white queen
+            end
           end
         end
       elsif (i == 1 || i == 6)  #rows for pawns
         row.each_with_index do |tile, j|
-          self[i, j] = Pawn.new
+          if i == 1
+            self[i, j] = Pawn.new("black", self, [i, j])
+          else
+            self[i, j] = Pawn.new("white", self, [i, j])
+          end  
         end
       end
     end
@@ -60,16 +84,8 @@ class Board
 
   def move_piece(start_pos, end_pos)
     raise ArgumentError "There is no piece here!" if self[start_pos] = @sentinel
+    self[end_pos_arr]
 
-  end
-
-  def move_piece(start_pos, end_pos)
-    if @rows[start_pos].class == NullPiece
-      raise "There is no piece there, you fool!"
-    elsif Piece.color
-      # if the piece at the end position is the same color as your piece, this is not a valid move :(
-
-    end
   end
 
   def valid_pos?(pos)

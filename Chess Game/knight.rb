@@ -1,6 +1,9 @@
 require_relative 'piece'
+require_relative 'board'
+
 
 class Knight < Piece
+  attr_accessor :color, :board, :position_arr
 
   def initialize(color, board, position_arr)
     @color = color

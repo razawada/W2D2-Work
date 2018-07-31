@@ -15,7 +15,7 @@ require_relative "queen"
 #output string "X" wherever there's a space at all
 class Display
 
-  attr_accessor :game, :board, :rows, :piece
+  attr_accessor :game, :board, :rows, :piece, :pawn, :rook, :king, :queen, :bishop, :knight
   attr_reader :cursor, :sentinel
 
   def initialize(board)
