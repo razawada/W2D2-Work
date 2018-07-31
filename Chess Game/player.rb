@@ -1,4 +1,6 @@
 require_relative 'display'
+require_relative 'board'
+require_relative 'game'
 
 
 class Player
@@ -6,7 +8,7 @@ class Player
 
 
   def initialize(color, display)
-    @color = color
+    @color = :color
     @display = display
   end
 end

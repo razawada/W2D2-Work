@@ -1,10 +1,16 @@
 require_relative "piece"
 require_relative "nullpiece"
 require_relative "display"
+require_relative "pawn"
+require_relative "rook"
+require_relative "knight"
+require_relative "bishop"
+require_relative "king"
+require_relative "queen"
 
 class Board
 
-  attr_accessor :game, :display, :rows, :render
+  attr_accessor :game, :display, :rows, :render, :build
   attr_reader :cursor, :sentinel
 
   def initialize
@@ -18,11 +24,21 @@ class Board
     @rows.each_with_index do |row, i|
       if i == 0 || i == 7  #rows for the non-Pawn pieces
         row.each_with_index do |tile, j|
-          self[i, j] = Piece.new #replace with piece instances, then non-Pawn pieces
+          if ((i == 0 || i == 7) && (j == 0 || j == 7))
+            self[i, j] = Rook.new#("black", self, [i, j])
+          elsif ((i == 0 || i == 7) && (j == 1 || j == 6))
+            self[i, j] = Knight.new
+          elsif ((i == 0 || i == 7) && (j == 2 || j == 5))
+            self[i, j] = Bishop.new
+          elsif ((i == 0 && j == 3) || (i == 7 && j == 4)) #king spaces
+            self[i, j] = King.new
+          elsif ((i == 0 && j == 4) || (i == 7 && j == 3)) #queen spaces
+            self[i, j] = Queen.new
+          end
         end
       elsif (i == 1 || i == 6)  #rows for pawns
         row.each_with_index do |tile, j|
-          self[i, j] = Piece.new #replace with piece instances, then pawns.
+          self[i, j] = Pawn.new
         end
       end
     end
@@ -44,7 +60,7 @@ class Board
 
   def move_piece(start_pos, end_pos)
     if self[end_pos] = @sentinel
-    end 
+    end
 
 
   end

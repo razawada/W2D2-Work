@@ -1,6 +1,7 @@
 require_relative 'piece'
 
-class Knight < Piece
+
+class Rook < Piece
 
   def initialize(color, board, position_arr)
     @color = color
